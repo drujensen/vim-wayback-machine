@@ -30,7 +30,7 @@ version.
 
 - This utility uses `git reset --hard {sha}`. You've been warned!
 
-## Copyright & License
+## License
 
 All code in this repository is released under the terms of the MIT License
 
