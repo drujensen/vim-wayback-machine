@@ -80,7 +80,7 @@ module VimWaybackMachine
   end
 
   class Navigator
-    UPDATE_TIME=1000
+    UPDATE_TIME=500
 
     def initialize(history)
       @last_position = 1
