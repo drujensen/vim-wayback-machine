@@ -12,7 +12,7 @@ and see the progression of changes.  The plugin is written in Ruby.
 ## Installation
 
 - Get [Pathogen](httsp://github.com/tpope/vim-pathogen)
-- clone this repository in your /vim/bundle directory
+- clone this repository in your `~/.vim/bundle` directory
 
 
 ## How to use it?
@@ -30,7 +30,7 @@ version.
 
 - This utility uses `git reset --hard {sha}`. You've been warned!
 
-## Copyright & License
+## License
 
 All code in this repository is released under the terms of the MIT License
 
