@@ -43,7 +43,7 @@ module VimWaybackMachine
     end
 
     def move_to(entry)
-      `git reset --hard #{entry.sha}`
+      `git reset --soft #{entry.sha}`
     end
 
     def stash!
@@ -100,9 +100,13 @@ module VimWaybackMachine
     end
 
     def refresh_target
-      save_cursor = @target_window.cursor if @target_window
-      VIM::command ":windo e"
-      @target_window.cursor = save_cursor if @target_window
+      if @target_window
+        save_cursor = @target_window.cursor
+        VIM::command ":#{find_window_number(@target_window)} wincmd w"
+        VIM::command ":e"
+        VIM::command ":#{find_window_number(@window)} wincmd w"
+        @target_window.cursor = save_cursor
+      end
     end
 
     def quit
@@ -110,11 +114,17 @@ module VimWaybackMachine
       refresh_target
     end
 
-    private
     def create_window
       file_name = VIM::evaluate 'tempname()'
       VIM::command ":below 5sp #{file_name}.wbm"
       $curwin
+    end
+
+    def find_window_number(window)
+      (1..VIM::Window.count).each do |cnt|
+        return cnt if VIM::Window[cnt-1] == window
+      end
+      return 0
     end
     
     def setup_buffer
